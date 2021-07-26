@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 
-// Import
+// external
 import Errlop from 'errlop'
 import fetch from 'node-fetch'
 import versionCompare from 'version-compare'
@@ -18,8 +18,25 @@ export type NodeScheduleIdentifier = string
  * @example `"4"`
  * @example `0.12`
  * @example `"0.12"`
+ *
+ * If an absolute or non-significant version number is returned, it will be converted to its significant version number equivalent.
+ * @example `"4.0.0"` => `"4"`
+ * @example `"4.0"` => `"4"`
+ * @example `"0.12.0"` => `"0.12"`
  */
 export type NodeScheduleInput = string | number
+
+/** Helper method for to ensure a version number is a significant version number. */
+export function getSignificantVersion(version: NodeScheduleInput): string {
+	const v = String(version)
+	const p = v.split('.')
+	// is already significant?
+	if (p.length === 1) return v
+	// if below v1, then minor version is significant
+	if (versionCompare(v, '1') === -1) return v.split('.').slice(0, 2).join('.')
+	// if v1 or after, them only major is significant
+	return v.split('.')[0]
+}
 
 /** The meta information of a Node.js schedule. */
 export interface NodeScheduleInformation {
@@ -139,7 +156,7 @@ export function getNodeScheduleInformation(
 	version: NodeScheduleInput
 ): NodeScheduleInformation {
 	// fetch
-	const info = nodeScheduleMap.get(String(version))
+	const info = nodeScheduleMap.get(getSignificantVersion(version))
 	// check
 	if (!info) {
 		if (nodeScheduleIdentifiers.length === 0)
@@ -162,7 +179,7 @@ export function getNodeScheduleInformation(
 
 /**
  * Get from the cache the Node.js schedule version numbers.
- * Requires {@link fetchNodeVersions} to have been previously awaited.
+ * Requires {@link preloadNodeSchedule} to have been previously awaited.
  * @returns immutable array of {@link nodeScheduleIdentifiers}
  */
 export function getNodeScheduleIdentifiers(): NodeScheduleIdentifiers {

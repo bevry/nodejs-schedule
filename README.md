@@ -49,12 +49,19 @@ import {
 await preloadNodeSchedule()
 // now that we have preloaded the data, we can do the queries
 
+console.log(getNodeScheduleInformation('12.0.0')))
+// { version: '12', start: Date, end: Date, maintenance?: Date, lts?: Date, codename?: string}
+
 console.log(getNodeScheduleInformation(12)))
 // { version: '12', start: Date, end: Date, maintenance?: Date, lts?: Date, codename?: string}
 
 console.log(getNodeScheduleIdentifiers()))
 // [ '0.8', '0.10', '0.12', '4', '5', ... ]
 ```
+
+You can combine this with [`@bevry/filter-nodejs-versions`](https://github.com/bevry/filter-nodejs-versions) to filter the Node.js versions.
+
+You can combine this with [`@bevry/nodejs-ecmascript-compatibility`](https://github.com/bevry/nodejs-ecmascript-compatibility) to get the ECMAScript compatibility for a given Node.js version.
 
 <!-- INSTALL/ -->
 

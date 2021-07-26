@@ -32,6 +32,12 @@ kava.suite('@bevry/nodejs-schedule', function (suite, test) {
 	test('getNodeScheduleInformation', function () {
 		log(getNodeScheduleInformation('4'))
 	})
+	test('getNodeScheduleInformation for insignificant version numbers', function () {
+		log(getNodeScheduleInformation('4.0.0'))
+		log(getNodeScheduleInformation('4.0'))
+		log(getNodeScheduleInformation('0.12.0'))
+		log(getNodeScheduleInformation('0.8.0'))
+	})
 	test('getSchedules', function () {
 		log(getNodeScheduleIdentifiers().map((v) => getNodeScheduleInformation(v)))
 		// can log, as is not huge
