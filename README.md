@@ -35,7 +35,7 @@ Fetch the schedule information of the Node.js versions
 
 ## Usage
 
-[Complete API Documentation.](http://master.nodejs-schedule.bevry.surge.sh/docs/globals.html)
+[Complete API Documentation.](http://master.nodejs-schedule.bevry.surge.sh/docs/)
 
 ```typescript
 import {
