@@ -49,7 +49,7 @@ kava.suite('@bevry/nodejs-schedule', function (suite, test) {
 		equal(
 			mutated.length,
 			source.length + 1,
-			'the lengths of the arrays should not be the same, as the source array should remain immutable'
+			'the lengths of the arrays should not be the same, as the source array should remain immutable',
 		)
 	})
 	suite('is immutable object', function (suite, test) {
@@ -59,12 +59,12 @@ kava.suite('@bevry/nodejs-schedule', function (suite, test) {
 		equal(
 			mutated.version,
 			'4-mutated',
-			'mutation should have been applied to the mutable returned object'
+			'mutation should have been applied to the mutable returned object',
 		)
 		equal(
 			source.version,
 			'4',
-			'however the mutation should not have been applied to the source object'
+			'however the mutation should not have been applied to the source object',
 		)
 	})
 })
