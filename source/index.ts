@@ -139,7 +139,7 @@ export async function preloadNodeSchedule(): Promise<void> {
 	} catch (err: any) {
 		throw new Errlop(
 			`Failed to fetch the Node.js schedule information of the API: ${url}`,
-			err,
+			err
 		)
 	}
 }
@@ -152,7 +152,7 @@ export async function preloadNodeSchedule(): Promise<void> {
  * @returns an immutable copy of the schedule information
  */
 export function getNodeScheduleInformation(
-	version: NodeScheduleInput,
+	version: NodeScheduleInput
 ): NodeScheduleInformation {
 	// fetch
 	const info = nodeScheduleMap.get(getSignificantVersion(version))
@@ -161,15 +161,15 @@ export function getNodeScheduleInformation(
 		if (nodeScheduleIdentifiers.length === 0)
 			throw new Error(
 				`Unable to get the schedule information for Node.js version [${JSON.stringify(
-					version,
-				)}] as the cache was empty.\nFetch first, then try again.`,
+					version
+				)}] as the cache was empty.\nFetch first, then try again.`
 			)
 		throw new Error(
 			`Unable to find the schedule information for Node.js version [${JSON.stringify(
-				version,
+				version
 			)}] in the cache.\nCheck the version number is valid and try again.\nVersion numbers that do exist are: [${nodeScheduleIdentifiers.join(
-				', ',
-			)}]`,
+				', '
+			)}]`
 		)
 	}
 	// return
